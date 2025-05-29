@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Usuarios</h1>
+        <div style="display: flex; gap: 10px;">
+            <a th:href="@{/usuario/agregar}" class="btn btn-success">Agregar Nuevo Usuario</a>
+            <a th:href="@{/usuario/buscar}" class="btn btn-info">Buscar Usuario</a>
+        </div>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de Usuario</th>
+                    <th>Nombre Completo</th>
+                    <th>Correo Electrónico</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}">1</td>
+                    <td th:text="${usuario.username}">usuario</td>
+                    <td th:text="${usuario.nombre}">Nombre Apellido</td>
+                    <td th:text="${usuario.email}">correo@ejemplo.com</td>
+                    <td>
+                        <a th:href="@{/usuario/editar(id=${usuario.id})}" class="btn btn-primary btn-sm">Editar</a>
+                        <a th:href="@{/usuario/eliminar(id=${usuario.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Reemplazo del <jsp:include> -->
+        <div th:replace="computadores/listar_todo :: listaComputadores"></div>
+
+        <p><a th:href="@{/}" class="btn btn-secondary">Cerrar Sesión</a></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
