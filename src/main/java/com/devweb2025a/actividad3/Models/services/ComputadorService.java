@@ -1,7 +1,8 @@
-package com.devweb2025a.actividad3.services;
+package com.devweb2025a.actividad3.Models.services;
 
-import com.devweb2025a.actividad3.entities.Computador;
-import com.devweb2025a.actividad3.repositories.ComputadorRepository;
+import com.devweb2025a.actividad3.Models.entities.Computador;
+import com.devweb2025a.actividad3.Models.repositories.ComputadorRepository;
+import com.devweb2025a.actividad3.Models.entities.Computador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

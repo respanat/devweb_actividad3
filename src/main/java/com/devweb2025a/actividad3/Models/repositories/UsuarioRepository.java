@@ -1,6 +1,6 @@
-package com.devweb2025a.actividad3.repositories;
+package com.devweb2025a.actividad3.Models.repositories;
 
-import com.devweb2025a.actividad3.entities.Usuario;
+import com.devweb2025a.actividad3.Models.entities.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

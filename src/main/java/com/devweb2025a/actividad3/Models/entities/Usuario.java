@@ -1,4 +1,4 @@
-package com.devweb2025a.actividad3.entities;
+package com.devweb2025a.actividad3.Models.entities;
 
 import jakarta.persistence.*;
 
@@ -32,6 +32,10 @@ public class Usuario {
         this.nombre = nombre;
         this.email = email;
     }
+
+	public Usuario(int i, String username, String password, String nombre, String email) {
+		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+	}
 
     // Getters y setters
     public Long getId() {

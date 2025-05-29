@@ -1,4 +1,4 @@
-package com.devweb2025a.actividad3.entities;
+package com.devweb2025a.actividad3.Models.entities;
 
 import jakarta.persistence.*;
 
@@ -170,5 +170,9 @@ public class Computador {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+	public void setUsuario_id(Integer usuario_id) {
+		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+	}
 }
 
