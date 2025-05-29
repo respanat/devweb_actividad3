@@ -4,74 +4,82 @@ import com.devweb2025a.actividad3.Models.entities.Computador;
 import com.devweb2025a.actividad3.Models.entities.Usuario;
 import com.devweb2025a.actividad3.Models.services.ComputadorService;
 import com.devweb2025a.actividad3.Models.services.UsuarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
 
 @Controller
 @RequestMapping("/computadores")
 public class ComputadorController {
 
-    @Autowired
-    private ComputadorService computadorService;
+    private final ComputadorService computadorService;
+    private final UsuarioService usuarioService;
 
     @Autowired
-    private UsuarioService usuarioService;
+    public ComputadorController(ComputadorService computadorService, UsuarioService usuarioService) {
+        this.computadorService = computadorService;
+        this.usuarioService = usuarioService;
+    }
 
-    @GetMapping({"/", "/listar_todo"})
+    @GetMapping({"", "/", "/listar_todo"})
     public String listarComputadores(Model model) {
         List<Computador> computadores = computadorService.obtenerTodosLosComputadores();
         model.addAttribute("computadores", computadores);
-        return "forms/computadores/listar_todo";
+        return "computadores/listar_todo";
     }
 
     @GetMapping("/agregar")
     public String mostrarFormularioAgregar(Model model) {
+        model.addAttribute("computador", new Computador());
         model.addAttribute("usuarios", usuarioService.obtenerTodosLosUsuarios());
-        return "forms/computadores/agregar";
+        return "computadores/agregar";
     }
 
     @PostMapping("/guardar")
-    public String guardarComputador(@ModelAttribute Computador computador,
-                                    @RequestParam(required = false) Integer usuario_id) {
-        computador.setUsuario_id(usuario_id);
+    public String guardarComputador(@ModelAttribute Computador computador, RedirectAttributes redirectAttributes) {
         computadorService.crearComputador(computador);
-        return "redirect:/usuario/listar_todo";
+        redirectAttributes.addFlashAttribute("mensaje", "Computador agregado exitosamente.");
+        return "redirect:/computadores/listar_todo";
     }
 
     @GetMapping("/editar")
-    public String mostrarFormularioEditar(@RequestParam int id, Model model) {
-        model.addAttribute("computador", computadorService.obtenerComputadorPorId(id));
-        return "forms/computadores/editar";
+    public String mostrarFormularioEditar(@RequestParam("id") int id, Model model) {
+        Computador computador = computadorService.obtenerComputadorPorId(id);
+        model.addAttribute("computador", computador);
+        model.addAttribute("usuarios", usuarioService.obtenerTodosLosUsuarios());
+        return "computadores/editar";
     }
 
     @PostMapping("/actualizar")
-    public String actualizarComputador(@ModelAttribute Computador computador,
-                                       @RequestParam(required = false) Integer usuario_id) {
-        computador.setUsuario_id(usuario_id);
+    public String actualizarComputador(@ModelAttribute Computador computador, RedirectAttributes redirectAttributes) {
         computadorService.actualizarComputador(computador);
-        return "redirect:/usuario/listar_todo";
+        redirectAttributes.addFlashAttribute("mensaje", "Computador actualizado correctamente.");
+        return "redirect:/computadores/listar_todo";
     }
 
     @GetMapping("/eliminar")
-    public String eliminarComputador(@RequestParam int id) {
+    public String eliminarComputador(@RequestParam("id") int id, RedirectAttributes redirectAttributes) {
         computadorService.eliminarComputador(id);
+        redirectAttributes.addFlashAttribute("mensaje", "Computador eliminado.");
         return "redirect:/computadores/listar_todo";
     }
 
     @GetMapping("/buscar")
     public String mostrarFormularioBuscar() {
-        return "forms/computadores/buscar";
+        return "computadores/buscar";
     }
 
     @PostMapping("/buscar")
-    public String buscarComputador(@RequestParam String criterio, Model model) {
-        List<Computador> encontrados = computadorService.buscarComputadoresPorCriterio(criterio);
-        model.addAttribute("computadoresEncontrados", encontrados);
+    public String buscarComputador(@RequestParam("criterio") String criterio, Model model) {
+        List<Computador> resultados = computadorService.buscarComputadoresPorCriterio(criterio);
+        model.addAttribute("computadoresEncontrados", resultados);
         model.addAttribute("criterio", criterio);
-        return "forms/computadores/buscar_resultado";
+        return "computadores/buscar_resultado";
     }
 }
 
