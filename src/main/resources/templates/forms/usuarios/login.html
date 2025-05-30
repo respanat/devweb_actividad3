@@ -57,31 +57,27 @@
             text-align: center;
             margin-top: 10px;
         }
-        .forgot-password {
+        .forgot-password,
+        .admin-button {
             text-align: center;
             margin-top: 15px;
             font-size: 0.9em;
         }
-        .forgot-password a {
+        .forgot-password a,
+        .admin-button button {
             color: #007bff;
             text-decoration: none;
-        }
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-        .admin-button {
-            text-align: center;
-            margin-top: 15px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
         }
         .admin-button button {
             background-color: #007bff;
             color: white;
             padding: 10px 15px;
-            border: none;
             border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
             width: 100%;
+            font-size: 1em;
         }
         .admin-button button:hover {
             background-color: #0056b3;
@@ -89,31 +85,40 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Iniciar Sesión</h2>
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
 
-        <p th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></p>
+    <p th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></p>
 
-        <form th:action="@{/usuario/login}" method="post">
-            <div class="form-group">
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Iniciar Sesión</button>
-
-            <div class="admin-button">
-                <button type="submit" name="adminLogin" value="true">Administrar</button>
-            </div>
-        </form>
-
-        <div class="forgot-password">
-            <a th:href="@{/usuario/recordar_password}">¿Olvidaste tu contraseña?</a>
+    <!-- Formulario de usuario normal -->
+    <form th:action="@{/usuario/login}" method="post">
+        <div class="form-group">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
         </div>
+        <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <!-- Botón de acceso admin -->
+    <form th:action="@{/usuario/login}" method="post">
+        <input type="hidden" name="username" value="admin">
+        <input type="hidden" name="password" value="admin">
+        <input type="hidden" name="adminLogin" value="true">
+        <div class="admin-button">
+            <button type="submit">Administrar</button>
+        </div>
+    </form>
+
+    <!-- Enlace para recordar contraseña -->
+    <div class="forgot-password">
+        <a th:href="@{/usuario/recordar_password}">¿Olvidaste tu contraseña?</a>
     </div>
+</div>
 </body>
 </html>
+
 

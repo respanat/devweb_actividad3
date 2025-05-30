@@ -33,10 +33,6 @@ public class Usuario {
         this.email = email;
     }
 
-	public Usuario(int i, String username, String password, String nombre, String email) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-	}
-
     // Getters y setters
     public Long getId() {
         return id;
@@ -89,3 +85,4 @@ public class Usuario {
                '}';
     }
 }
+

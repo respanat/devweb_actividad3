@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -30,7 +31,7 @@ public class UsuarioService {
     }
 
     public void actualizarUsuario(Usuario usuario) {
-        usuarioRepository.save(usuario); // save funciona para crear y actualizar
+        usuarioRepository.save(usuario); // `save` sirve tanto para crear como actualizar
     }
 
     public void eliminarUsuario(int id) {
@@ -41,7 +42,6 @@ public class UsuarioService {
         return usuarioRepository.findByUsername(username).orElse(null);
     }
 
-   
     public Usuario autenticarUsuario(String usernameOrEmail, String password) {
         Usuario usuario = usuarioRepository.findByUsername(usernameOrEmail)
                 .orElseGet(() -> usuarioRepository.findByEmail(usernameOrEmail).orElse(null));
@@ -53,11 +53,11 @@ public class UsuarioService {
         return null;
     }
 
-    
-    public Usuario buscarPorUsernameOEmail(String identifier) {
+    public Usuario iniciarRecordarPassword(String identifier) {
         return usuarioRepository.findByUsername(identifier)
                 .orElseGet(() -> usuarioRepository.findByEmail(identifier).orElse(null));
     }
 }
+
 
 
