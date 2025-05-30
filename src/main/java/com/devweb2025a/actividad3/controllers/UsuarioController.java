@@ -100,8 +100,9 @@ public class UsuarioController {
     @GetMapping("/listar")
     public String mostrarDetallesUsuario(HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+	 System.out.println("DEBUG: usuarioLogueado en sesión: " + usuario); // depuración... luego borrar
         if (usuario == null) return "redirect:/usuario/login";
-        model.addAttribute("usuario", usuario);
+        model.addAttribute("usuarioLogueado", usuario);
         return "forms/usuarios/listar";
     }
 

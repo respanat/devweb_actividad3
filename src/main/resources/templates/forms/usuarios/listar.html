@@ -97,15 +97,27 @@
                 <span class="label">Email:</span>
                 <span class="value" th:text="${usuarioLogueado.email}">correo@example.com</span>
             </div>
-            <div class="logout-button">
-                <button th:onclick="'window.location.href=\'' + @{/usuarios/logout} + '\'" type="button">Cerrar Sesión</button>
-            </div>
+	    <!--<div class="logout-button">
+    		<a th:href="@{/forms/usuario/logout}">
+        	<button type="button">Cerrar Sesión</button>
+    		</a>
+	    </div>
+	    <div class="logout-button">
+                <button th:onclick="'window.location.href=\'' + @{/forms/usuario/logout} + '\'" type="button">Cerrar Sesión</button>
+            </div>-->
+	    <div class="logout-button">
+    		<a th:href="@{/usuario/logout}">
+        	<button type="button">Cerrar Sesión</button>
+		</a>
+	</div>
+
+
         </div>
 
         <div th:if="${usuarioLogueado == null}">
             <p class="error-message">No hay ningún usuario logueado.</p>
             <div class="back-to-login">
-                <a th:href="@{/usuarios/login}">Volver a Iniciar Sesión</a>
+                <a th:href="@{/forms/usuario/login}">Volver a Iniciar Sesión</a>
             </div>
         </div>
     </div>

@@ -12,20 +12,39 @@ public class Computador {
 
     private String marca;
     private String categoria;
+    
+    @Column(name = "marcaCpu")
     private String marcaCpu;
+
+    @Column(name = "velocidadCpu")
     private double velocidadCpU;
+    
+    @Column(name = "tecnologiaRam")
     private String tecnologiaRam;
+    
+    @Column(name = "capacidadRam")
     private int capacidadRam;
+    
+    @Column(name = "tecnologiaDisco")
     private String tecnologiaDisco;
+
+    @Column(name = "capacidadDisco")
     private int capacidadDisco;
+
+    @Column(name = "numPuertosUSB")
     private int numPuertosUSB;
+    
+    @Column(name = "numPuertosHDMI")
     private int numPuertosHDMI;
+
+    @Column(name = "marcaMonitor")
     private String marcaMonitor;
+    
     private double pulgadas;
     private double precio;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuarios_id")
     private Usuario usuario;
 
     public Computador() {

@@ -1,69 +1,59 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Lista de Computadores</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container mt-4">
-    <h1>Lista de Computadores</h1>
-    <p>
-        <a th:href="@{/computadores/agregar}" class="btn btn-success">Agregar Nuevo Computador</a>
-        <a th:href="@{/computadores/buscar}" class="btn btn-info ml-2">Buscar Computador</a>
-    </p>
+<div th:fragment="listaComputadores">
+    <div class="container mt-4">
+        <h1>Lista de Computadores</h1>
+        <p>
+            <a th:href="@{/computadores/agregar}" class="btn btn-success">Agregar Nuevo Computador</a>
+            <a th:href="@{/computadores/buscar}" class="btn btn-info ml-2">Buscar Computador</a>
+        </p>
 
-    <div th:if="${#lists.isEmpty(computadores)}">
-        <p class="alert alert-info">No hay computadores registrados.</p>
-    </div>
+        <div th:if="${#lists.isEmpty(computadores)}">
+            <p class="alert alert-info">No hay computadores registrados.</p>
+        </div>
 
-    <div th:if="${!#lists.isEmpty(computadores)}">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Marca</th>
-                <th>Categoría</th>
-                <th>Marca CPU</th>
-                <th>Velocidad CPU</th>
-                <th>RAM (Tecnología/Capacidad)</th>
-                <th>Disco (Tecnología/Capacidad)</th>
-                <th>USB</th>
-                <th>HDMI</th>
-                <th>Monitor (Marca/Pulgadas)</th>
-                <th>Precio</th>
-                <th>Usuario ID</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="computador : ${computadores}">
-                <td th:text="${computador.id}">ID</td>
-                <td th:text="${computador.marca}">Marca</td>
-                <td th:text="${computador.categoria}">Categoría</td>
-                <td th:text="${computador.marcaCpu}">CPU</td>
-                <td th:text="${computador.velocidadCpU}">Velocidad</td>
-                <td th:text="${computador.tecnologiaRam + '/' + computador.capacidadRam + ' GB'}">RAM</td>
-                <td th:text="${computador.tecnologiaDisco + '/' + computador.capacidadDisco + ' GB'}">Disco</td>
-                <td th:text="${computador.numPuertosUSB}">USB</td>
-                <td th:text="${computador.numPuertosHDMI}">HDMI</td>
-                <td th:text="${computador.marcaMonitor + '/' + computador.pulgadas + '\"'}">Monitor</td>
-                <td th:text="${computador.precio}">Precio</td>
-                <td th:text="${computador.usuario_id != null ? computador.usuario_id : 'Sin asignar'}">Usuario</td>
-                <td>
-                    <a th:href="@{/computadores/editar(id=${computador.id})}" class="btn btn-primary btn-sm">Editar</a>
-                    <a th:href="@{/computadores/eliminar(id=${computador.id})}"
-                       class="btn btn-danger btn-sm"
-                       onclick="return confirm('¿Estás seguro de eliminar este computador?')">Eliminar</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div th:unless="${#lists.isEmpty(computadores)}">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Marca</th>
+                        <th>Categoría</th>
+                        <th>Marca CPU</th>
+                        <th>Velocidad CPU</th>
+                        <th>RAM</th>
+                        <th>Disco</th>
+                        <th>USB</th>
+                        <th>HDMI</th>
+                        <th>Monitor</th>
+                        <th>Precio</th>
+                        <th>Usuario ID</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="computador : ${computadores}">
+                        <td th:text="${computador.id}"></td>
+                        <td th:text="${computador.marca}"></td>
+                        <td th:text="${computador.categoria}"></td>
+                        <td th:text="${computador.marcaCpu}"></td>
+                        <td th:text="${computador.velocidadCpU}"></td>
+                   	<td th:text="${computador.tecnologiaRam + '/' + computador.capacidadRam + ' GB'}"></td>
+                        <td th:text="${computador.tecnologiaDisco + '/' + computador.capacidadDisco + ' GB'}"></td>
+                        <td th:text="${computador.numPuertosUSB}"></td>
+                        <td th:text="${computador.numPuertosHDMI}"></td>
+			<td th:text="${computador.marcaMonitor + '/' + computador.pulgadas + ' &quot;'}"></td>
+                        <td th:text="${computador.precio}"></td>
+		  	<td th:text="${computador.usuario != null ? computador.usuario.id : 'Sin asignar'}"></td>
+                        <td>
+                            <a th:href="@{'/computadores/editar?id=' + ${computador.id}}" class="btn btn-primary btn-sm">Editar</a>
+                            <a th:href="@{'/computadores/eliminar?id=' + ${computador.id}}" class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Estás seguro de eliminar este computador?')">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+
 

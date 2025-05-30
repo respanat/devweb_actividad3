@@ -30,14 +30,14 @@ public class ComputadorController {
     public String listarComputadores(Model model) {
         List<Computador> computadores = computadorService.obtenerTodosLosComputadores();
         model.addAttribute("computadores", computadores);
-        return "computadores/listar_todo";
+        return "forms/computadores/listar_todo";
     }
 
     @GetMapping("/agregar")
     public String mostrarFormularioAgregar(Model model) {
         model.addAttribute("computador", new Computador());
         model.addAttribute("usuarios", usuarioService.obtenerTodosLosUsuarios());
-        return "computadores/agregar";
+        return "forms/computadores/agregar";
     }
 
     @PostMapping("/guardar")
@@ -52,7 +52,7 @@ public class ComputadorController {
         Computador computador = computadorService.obtenerComputadorPorId(id);
         model.addAttribute("computador", computador);
         model.addAttribute("usuarios", usuarioService.obtenerTodosLosUsuarios());
-        return "computadores/editar";
+        return "forms/computadores/editar";
     }
 
     @PostMapping("/actualizar")
@@ -66,12 +66,12 @@ public class ComputadorController {
     public String eliminarComputador(@RequestParam("id") int id, RedirectAttributes redirectAttributes) {
         computadorService.eliminarComputador(id);
         redirectAttributes.addFlashAttribute("mensaje", "Computador eliminado.");
-        return "redirect:/computadores/listar_todo";
+        return "redirect:/usuarios/listar_todo";
     }
 
     @GetMapping("/buscar")
     public String mostrarFormularioBuscar() {
-        return "computadores/buscar";
+        return "forms/computadores/buscar";
     }
 
     @PostMapping("/buscar")
@@ -79,7 +79,7 @@ public class ComputadorController {
         List<Computador> resultados = computadorService.buscarComputadoresPorCriterio(criterio);
         model.addAttribute("computadoresEncontrados", resultados);
         model.addAttribute("criterio", criterio);
-        return "computadores/buscar_resultado";
+        return "forms/computadores/buscar_resultado";
     }
 }
 

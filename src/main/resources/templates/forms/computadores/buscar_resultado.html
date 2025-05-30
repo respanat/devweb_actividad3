@@ -44,9 +44,9 @@
                 <td th:text="${computador.tecnologiaDisco + '/' + computador.capacidadDisco + ' GB'}"></td>
                 <td th:text="${computador.numPuertosUSB}"></td>
                 <td th:text="${computador.numPuertosHDMI}"></td>
-                <td th:text="${computador.marcaMonitor + '/' + computador.pulgadas + '\"'}"></td>
+                <td th:text="${computador.marcaMonitor + '/' + computador.pulgadas + ' &quot;'}"></td>
                 <td th:text="${computador.precio}"></td>
-                <td th:text="${computador.usuario_id == null ? 'Sin asignar' : computador.usuario_id}"></td>
+	       <td th:text="${computador.usuario != null ? computador.usuario.id : 'Sin asignar'}"></td>
                 <td>
                     <a th:href="@{/computadores/editar(id=${computador.id})}" class="btn btn-primary btn-sm">Editar</a>
                     <a th:href="@{/computadores/eliminar(id=${computador.id})}" class="btn btn-danger btn-sm"

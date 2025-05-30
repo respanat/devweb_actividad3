@@ -65,7 +65,7 @@
         <div class="form-group">
             <label for="usuario_id">Usuario Asociado:</label>
             <select class="form-control" id="usuario_id" name="usuario_id" required>
-                <option th:each="usuario : ${usuarios}"
+                <option th:each="usuario : ${usuario}"
                         th:value="${usuario.id}"
                         th:text="${usuario.nombre} + ' (' + ${usuario.username} + ')'">
                 </option>
