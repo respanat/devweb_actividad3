@@ -14,6 +14,9 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     @Autowired
+    private EmailService emailService; // Inyecta el EmailService
+
+    @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
@@ -56,6 +59,17 @@ public class UsuarioService {
     public Usuario iniciarRecordarPassword(String identifier) {
         return usuarioRepository.findByUsername(identifier)
                 .orElseGet(() -> usuarioRepository.findByEmail(identifier).orElse(null));
+    }
+
+    // Método para enviar el correo de recuperación con la contraseña
+    public void sendPasswordRecoveryEmail(Usuario usuario) {
+        String subject = "Recuperación de Contraseña";
+        String body = "Hola " + usuario.getNombre() + ",\n\n"
+                    + "Tu contraseña es: " + usuario.getPassword() + "\n\n" // Mostrando la contraseña directamente
+                    + "Por favor, no compartas esta información con nadie.\n\n"
+                    + "Saludos,\nTu Equipo de Soporte";
+
+        emailService.sendSimpleMail(usuario.getEmail(), subject, body);
     }
 }
 
