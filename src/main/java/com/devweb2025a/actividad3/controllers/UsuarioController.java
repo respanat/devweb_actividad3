@@ -112,7 +112,7 @@ public class UsuarioController {
         return "redirect:/usuario/login";
     }
 
-    @GetMapping("/recordar_password")
+    /*@GetMapping("/recordar_password")
     public String mostrarFormularioRecordarPassword() {
         return "forms/usuarios/recordar_password";
     }
@@ -122,7 +122,7 @@ public class UsuarioController {
         // Lógica pendiente
         model.addAttribute("mensaje", "Correo enviado a " + email);
         return "forms/usuarios/recordar_password";
-    }
+    }*/
 }
 
 
