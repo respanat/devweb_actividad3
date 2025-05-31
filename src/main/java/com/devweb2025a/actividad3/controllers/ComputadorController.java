@@ -44,7 +44,7 @@ public class ComputadorController {
     public String guardarComputador(@ModelAttribute Computador computador, RedirectAttributes redirectAttributes) {
         computadorService.crearComputador(computador);
         redirectAttributes.addFlashAttribute("mensaje", "Computador agregado exitosamente.");
-        return "redirect:/computadores/listar_todo";
+        return "redirect:/usuario/listar_todo";
     }
 
     @GetMapping("/editar")
@@ -59,14 +59,14 @@ public class ComputadorController {
     public String actualizarComputador(@ModelAttribute Computador computador, RedirectAttributes redirectAttributes) {
         computadorService.actualizarComputador(computador);
         redirectAttributes.addFlashAttribute("mensaje", "Computador actualizado correctamente.");
-        return "redirect:/computadores/listar_todo";
+        return "redirect:/usuario/listar_todo";
     }
 
     @GetMapping("/eliminar")
     public String eliminarComputador(@RequestParam("id") int id, RedirectAttributes redirectAttributes) {
         computadorService.eliminarComputador(id);
         redirectAttributes.addFlashAttribute("mensaje", "Computador eliminado.");
-        return "redirect:/usuarios/listar_todo";
+        return "redirect:/usuario/listar_todo";
     }
 
     @GetMapping("/buscar")

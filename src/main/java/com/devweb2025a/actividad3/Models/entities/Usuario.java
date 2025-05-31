@@ -1,6 +1,7 @@
 package com.devweb2025a.actividad3.Models.entities;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "usuarios")
