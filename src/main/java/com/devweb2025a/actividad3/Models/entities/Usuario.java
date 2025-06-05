@@ -23,7 +23,7 @@ public class Usuario {
     private String email;
 
     // Constructor vacío
-    public Usuario() {
+    public Usuario(int par, String testuser, String password1, String test_User, String testexamplecom) {
     }
 
     // Constructor con todos los atributos excepto ID
