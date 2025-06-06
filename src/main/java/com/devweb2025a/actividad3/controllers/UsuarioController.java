@@ -100,7 +100,7 @@ public class UsuarioController {
     @GetMapping("/listar")
     public String mostrarDetallesUsuario(HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
-	 System.out.println("DEBUG: usuarioLogueado en sesión: " + usuario); // depuración... luego borrar
+	 System.out.println("DEBUG: usuarioLogueado en sesión: " + usuario); // depuración... 
         if (usuario == null) return "redirect:/usuario/login";
         model.addAttribute("usuarioLogueado", usuario);
         return "forms/usuarios/listar";
@@ -112,17 +112,6 @@ public class UsuarioController {
         return "redirect:/usuario/login";
     }
 
-    /*@GetMapping("/recordar_password")
-    public String mostrarFormularioRecordarPassword() {
-        return "forms/usuarios/recordar_password";
-    }
-
-    @PostMapping("/recordar_password")
-    public String procesarRecordarPassword(@RequestParam String email, Model model) {
-        // Lógica pendiente
-        model.addAttribute("mensaje", "Correo enviado a " + email);
-        return "forms/usuarios/recordar_password";
-    }*/
 }
 
 

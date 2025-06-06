@@ -77,7 +77,6 @@
 
         <div class="form-group">
             <label for="usuario_id">ID de Usuario (Opcional):</label>
-            <!--<input type="number" class="form-control" id="usuario_id" name="usuario_id" th:value="${computador.usuario_id}">-->
 	    <input type="number" class="form-control" id="usuario_id" name="usuario.id" th:value="${computador.usuario != null ? computador.usuario.id : ''}">
         </div>
 
