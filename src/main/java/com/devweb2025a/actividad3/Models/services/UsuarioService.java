@@ -12,15 +12,17 @@ import java.util.Optional;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final EmailService emailService;
+
+    //@Autowired
+    //private EmailService emailService; // Inyecta el EmailService
 
     @Autowired
-    private EmailService emailService; // Inyecta el EmailService
-
-    @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, EmailService emailService) {
         this.usuarioRepository = usuarioRepository;
+        this.emailService = emailService;
     }
-
+	
     public void crearUsuario(Usuario usuario) {
         usuarioRepository.save(usuario);
     }

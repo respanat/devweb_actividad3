@@ -31,7 +31,7 @@ public class testcomputadores {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        testUser = new Usuario(1, "testuser", "password123", "Usuario Test", "test@example.com");
+        testUser = new Usuario("testuser", "password123", "Usuario Test", "test@example.com");
     }
 
     @Test
@@ -80,7 +80,7 @@ public class testcomputadores {
         Computador nuevoComputador = new Computador(0, "Acer", "Chromebook", "MediaTek", 1.8, "LPDDR4", 4, "eMMC", 64, 2, 0, "Acer", 11.6, 300.00, testUser);
         
         // Mock del método save de JpaRepository (no devuelve nada para void)
-        doNothing().when(computadorRepository).save(any(Computador.class));
+	when(computadorRepository.save(nuevoComputador)).thenReturn(nuevoComputador);
 
         // Llama al método del servicio (que ahora es void)
         computadorService.crearComputador(nuevoComputador);
@@ -94,7 +94,7 @@ public class testcomputadores {
         Computador computadorExistente = new Computador(1, "HP", "Laptop", "Intel", 2.5, "DDR4", 16, "SSD", 512, 3, 1, "Dell", 15.6, 950.00, testUser);
         computadorExistente.setPrecio(1000.00); // Modificación para la actualización
 
-        doNothing().when(computadorRepository).save(any(Computador.class));
+	when(computadorRepository.save(computadorExistente)).thenReturn(computadorExistente);
 
         computadorService.actualizarComputador(computadorExistente);
 

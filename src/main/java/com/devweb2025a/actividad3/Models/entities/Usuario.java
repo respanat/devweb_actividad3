@@ -2,6 +2,7 @@ package com.devweb2025a.actividad3.Models.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -23,7 +24,7 @@ public class Usuario {
     private String email;
 
     // Constructor vacío
-    public Usuario(int par, String testuser, String password1, String test_User, String testexamplecom) {
+    public Usuario() {
     }
 
     // Constructor con todos los atributos excepto ID
