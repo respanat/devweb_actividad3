@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/usuario")
@@ -24,7 +25,9 @@ public class UsuarioController {
     @GetMapping({"/", "/listar_todo"})
     public String listarUsuarios(Model model) {
         model.addAttribute("usuarios", usuarioService.obtenerTodosLosUsuarios());
+	if (computadorService != null) {
         model.addAttribute("computadores", computadorService.obtenerTodosLosComputadores());
+	}
         return "forms/usuarios/listar_todo";
     }
 
@@ -43,18 +46,46 @@ public class UsuarioController {
 
     @GetMapping("/editar")
     public String mostrarFormularioEditar(@RequestParam int id, Model model) {
-        model.addAttribute("usuario", usuarioService.obtenerUsuarioPorId(id));
-        return "forms/usuarios/editar";
+	    Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
+	if (usuario != null) {
+		model.addAttribute("usuario", usuario);
+            	return "forms/usuarios/editar";
+	}else {
+		return "redirect:/usuario/listar_todo";
+	}
+        
     }
 
     @PostMapping("/actualizar")
-    public String actualizarUsuario(@RequestParam int id, @RequestParam String username,
+    public String actualizarUsuario(@RequestParam int id,
+                                    @RequestParam String username,
+                                    @RequestParam String password,
+                                    @RequestParam String nombre,
+                                    @RequestParam String email,
+                                    Model model) { 
+
+        Usuario usuarioExistente = usuarioService.obtenerUsuarioPorId(id);
+
+        if (usuarioExistente != null) {
+            usuarioExistente.setUsername(username);
+            usuarioExistente.setPassword(password);
+            usuarioExistente.setNombre(nombre);
+            usuarioExistente.setEmail(email);
+            
+            usuarioService.actualizarUsuario(usuarioExistente);
+            return "redirect:/usuario/listar_todo";
+        } else {
+            model.addAttribute("errorMessage", "Usuario con ID " + id + " no encontrado para actualizar.");
+            return "redirect:/usuario/listar_todo";
+        }
+    }
+    /*public String actualizarUsuario(@RequestParam int id, @RequestParam String username,
                                     @RequestParam String password, @RequestParam String nombre,
                                     @RequestParam String email) {
         Usuario usuario = new Usuario(username, password, nombre, email);
         usuarioService.actualizarUsuario(usuario);
         return "redirect:/usuario/listar_todo";
-    }
+    }*/
 
     @GetMapping("/eliminar")
     public String eliminarUsuario(@RequestParam int id) {
