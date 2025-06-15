@@ -79,13 +79,6 @@ public class UsuarioController {
             return "redirect:/usuario/listar_todo";
         }
     }
-    /*public String actualizarUsuario(@RequestParam int id, @RequestParam String username,
-                                    @RequestParam String password, @RequestParam String nombre,
-                                    @RequestParam String email) {
-        Usuario usuario = new Usuario(username, password, nombre, email);
-        usuarioService.actualizarUsuario(usuario);
-        return "redirect:/usuario/listar_todo";
-    }*/
 
     @GetMapping("/eliminar")
     public String eliminarUsuario(@RequestParam int id) {
