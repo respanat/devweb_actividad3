@@ -5,6 +5,7 @@ Repositorio para la actividad 3 de desarrollo web en la UdeC
 * Para ejecutar se necesita tener instalado el motor tomcat 9+ como mínimo
 * Hacer un clean and build desde el IDE correspondiente (se recomiendo definitivamente utilizar Apache Netbeans)
 * Ejecutar con run desde Maven y entrar al respectivo render de la página de bienvenida.
+* Igualmente para el caso "productivo", se importa la base de datos desde la copia de seguridad, y se descomprime en la ruta escogida para el funcionamiento definitivo
 
 !!!Nuevamente como user/password de administración, se tiene admin/admin !!!
 
